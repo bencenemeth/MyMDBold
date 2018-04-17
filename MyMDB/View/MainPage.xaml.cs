@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyMDB.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace MyMDB
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MoviesPage));
         }
     }
 }

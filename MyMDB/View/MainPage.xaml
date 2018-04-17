@@ -13,10 +13,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="16,0,16,0" VerticalAlignment="Center">
-            <Image Source="ms-appx:///Assets/Movies_end_of_year_2017.0.jpg"/>
-            <TextBlock Text="Movies" FontSize="20" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <Button Grid.Column="0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="16,0,16,0" Click="Button_Click">
+            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                <Image Source="ms-appx:///Assets/Movies_end_of_year_2017.0.jpg"/>
+                <TextBlock Text="Movies" FontSize="20" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
         <StackPanel Grid.Column="1" Margin="16,0,16,0" VerticalAlignment="Center">
             <Image Source="ms-appx:///Assets/best-rated-tv-series.jpg"/>
             <TextBlock Text="Series" FontSize="20" HorizontalAlignment="Center"/>
