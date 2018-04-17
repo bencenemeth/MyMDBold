@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="MyMDB.View.Person"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMDB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="16,16,16,16">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="ms-appx:///Assets/Unknown_Person.png" Width="100" Margin="0,0,16,0" />
+                <StackPanel>
+                    <TextBlock Text="Name"/>
+                    <TextBlock Text="Birth"/>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Appeared in"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
