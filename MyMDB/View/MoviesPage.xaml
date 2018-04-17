@@ -7,7 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock Text="Trending"/>
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Auto">
+        </ListView>
+        <TextBlock Text="Popular"/>
+        <TextBlock Text="Anticipated"/>
+        <TextBlock Text="Box Office"/>
+    </StackPanel>
 </Page>
