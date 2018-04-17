@@ -7,12 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CommandBar>
-            <CommandBar.Content>
-                <TextBlock>MyMDB</TextBlock>
-
-            </CommandBar.Content>
-        </CommandBar>
-    </StackPanel>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="16,0,16,0" VerticalAlignment="Center">
+            <Image Source="ms-appx:///Assets/Movies_end_of_year_2017.0.jpg"/>
+            <TextBlock Text="Movies" FontSize="20" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="16,0,16,0" VerticalAlignment="Center">
+            <Image Source="ms-appx:///Assets/best-rated-tv-series.jpg"/>
+            <TextBlock Text="Series" FontSize="20" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Margin="16,0,16,0" VerticalAlignment="Center">
+            <Image Source="ms-appx:///Assets/Top-Best-Actors-in-the-World-of-All-Time-With-Best-Performance-And-Award.jpg"/>
+            <TextBlock Text="Cast/Crew" FontSize="20" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
 </Page>
