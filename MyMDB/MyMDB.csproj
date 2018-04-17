@@ -95,10 +95,28 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\MovieDetailsPage.xaml.cs">
+      <DependentUpon>MovieDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MoviesPage.xaml.cs">
+      <DependentUpon>MoviesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonDetailsPage.xaml.cs">
+      <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PersonPage.xaml.cs">
+      <DependentUpon>PersonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SeriesDetailsPage.xaml.cs">
+      <DependentUpon>SeriesDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SeriesPage.xaml.cs">
+      <DependentUpon>SeriesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -107,6 +125,11 @@
     <None Include="MyMDB_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\best-rated-tv-series.jpg" />
+    <Content Include="Assets\Movies_end_of_year_2017.0.jpg" />
+    <Content Include="Assets\Top-Best-Actors-in-the-World-of-All-Time-With-Best-Performance-And-Award.jpg" />
+    <Content Include="Assets\unknown-woman-4-4-4.jpg" />
+    <Content Include="Assets\Unknown_Person.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -121,9 +144,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MovieDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MoviesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PersonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SeriesDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SeriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
