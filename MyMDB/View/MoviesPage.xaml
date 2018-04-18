@@ -14,18 +14,68 @@
 
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock Text="Trending"/>
-        <ListView ItemsSource="{Binding Trending}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Auto">
+        <ListView ItemsSource="{Binding Trending}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Image/>
-                        <TextBlock Text="{Binding Name}"/>
+                        <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
+                        <TextBlock Text="{Binding Movie.Title}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
         <TextBlock Text="Popular"/>
+        <ListView ItemsSource="{Binding Popular}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
+                        <TextBlock Text="{Binding Title}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
         <TextBlock Text="Anticipated"/>
+        <ListView ItemsSource="{Binding Anticipated}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
+                        <TextBlock Text="{Binding Movie.Title}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
         <TextBlock Text="Box Office"/>
+        <ListView ItemsSource="{Binding BoxOffice}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
+                        <TextBlock Text="{Binding Movie.Title}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
     </StackPanel>
 </Page>

@@ -14,16 +14,16 @@ namespace MyMDB.ViewModel
 {
     public class MoviesPageViewModel : ViewModelBase
     {
-        public ObservableCollection<Movie> Trending { get; set; } = new ObservableCollection<Movie>();
-        public ObservableCollection<Movie> Popular { get; set; } = new ObservableCollection<Movie>();
-        public ObservableCollection<Movie> Anticipated { get; set; } = new ObservableCollection<Movie>();
-        public ObservableCollection<Movie> BoxOffice { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<TrendingMovie> Trending { get; set; } = new ObservableCollection<TrendingMovie>();
+        public ObservableCollection<MovieExtended> Popular { get; set; } = new ObservableCollection<MovieExtended>();
+        public ObservableCollection<AnticipatedMovie> Anticipated { get; set; } = new ObservableCollection<AnticipatedMovie>();
+        public ObservableCollection<BoxOfficeMovie> BoxOffice { get; set; } = new ObservableCollection<BoxOfficeMovie>();
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var service = new TraktService();
 
-            List<int> sizes = new List<int> { 5 };
+            List<int> sizes = new List<int> { 10 };
 
             var trending = await service.GetTrendingMoviesAsync();
             sizes.Add(trending.Count);

@@ -18,9 +18,14 @@ namespace MyMDB.Service
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("trakt-api-version", "2");
                 client.DefaultRequestHeaders.Add("trakt-api-key", clientKey);
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
                 var response = await client.GetAsync(uri);
                 var json = await response.Content.ReadAsStringAsync();
-                T result = JsonConvert.DeserializeObject<T>(json);
+                T result = JsonConvert.DeserializeObject<T>(json, settings);
                 return result;
             }
         }
@@ -40,9 +45,9 @@ namespace MyMDB.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<Movie> GetMovieAsync(int id)
+        public async Task<MovieExtended> GetMovieAsync(int id)
         {
-            return await GetAsync<Movie>(new Uri(serverUrl, $"movies/{id}"));
+            return await GetAsync<MovieExtended>(new Uri(serverUrl, $"movies/{id}"));
         }
 
         /// <summary>
@@ -59,36 +64,36 @@ namespace MyMDB.Service
         /// Returns all movies being watched right now. Movies with the most users are returned first.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Movie>> GetTrendingMoviesAsync()
+        public async Task<List<TrendingMovie>> GetTrendingMoviesAsync()
         {
-            return await GetAsync<List<Movie>>(new Uri(serverUrl, "movies/trending"));
+            return await GetAsync<List<TrendingMovie>>(new Uri(serverUrl, "movies/trending"));
         }
 
         /// <summary>
         /// Returns the most popular movies. Popularity is calculated using the rating percentage and the number of ratings.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Movie>> GetPopularMoviesAsync()
+        public async Task<List<MovieExtended>> GetPopularMoviesAsync()
         {
-            return await GetAsync<List<Movie>>(new Uri(serverUrl, "movies/popular"));
+            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, "movies/popular"));
         }
 
         /// <summary>
         /// Returns the most anticipated movies based on the number of lists a movie appears on.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Movie>> GetAnticipatedMoviesAsync()
+        public async Task<List<AnticipatedMovie>> GetAnticipatedMoviesAsync()
         {
-            return await GetAsync<List<Movie>>(new Uri(serverUrl, "movies/anticipated"));
+            return await GetAsync<List<AnticipatedMovie>>(new Uri(serverUrl, "movies/anticipated"));
         }
 
         /// <summary>
         /// Returns the top 10 grossing movies in the U.S. box office last weekend. Updated every Monday morning.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Movie>> GetBoxOfficeMoviesAsync()
+        public async Task<List<BoxOfficeMovie>> GetBoxOfficeMoviesAsync()
         {
-            return await GetAsync<List<Movie>>(new Uri(serverUrl, "movies/boxoffice"));
+            return await GetAsync<List<BoxOfficeMovie>>(new Uri(serverUrl, "movies/boxoffice"));
         }
 
         /// <summary>

@@ -9,10 +9,9 @@ namespace MyMDB.Model
 
     public class MovieExtended
     {
-        public Movie movie { get; set; }
-        //public string title { get; set; }
-        //public int year { get; set; }
-        //public IDs ids { get; set; }
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public IDs Ids { get; set; }
         public string tagline { get; set; }
         public string overview { get; set; }
         public string released { get; set; }

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
-
-    public class Movie
+    public class TrendingMovie
     {
-        public string title { get; set; }
-        public int year { get; set; }
-        public IDs ids { get; set; }
+        public int Watchers { get; set; }
+        public MovieExtended Movie { get; set; }
     }
 }
