@@ -16,7 +16,11 @@
         <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="{Binding ElementName=panel, Path=ActualHeight}">
             <ItemsControl>
                 <TextBlock Text="Trending" FontSize="32" FontWeight="Bold" Margin="16,16,0,16"/>
-                <ListView ItemsSource="{Binding Trending}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+                <ListView ItemsSource="{Binding Trending}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnListItemClick}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -32,7 +36,11 @@
                     </ListView.ItemsPanel>
                 </ListView>
                 <TextBlock Text="Popular" FontSize="32" FontWeight="Bold" Margin="16,52,0,16"/>
-                <ListView ItemsSource="{Binding Popular}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+                <ListView ItemsSource="{Binding Popular}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnListItemClick}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -48,7 +56,11 @@
                     </ListView.ItemsPanel>
                 </ListView>
                 <TextBlock Text="Anticipated" FontSize="32" FontWeight="Bold" Margin="16,52,0,16"/>
-                <ListView ItemsSource="{Binding Anticipated}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+                <ListView ItemsSource="{Binding Anticipated}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnListItemClick}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -64,7 +76,11 @@
                     </ListView.ItemsPanel>
                 </ListView>
                 <TextBlock Text="Box Office" FontSize="32" FontWeight="Bold" Margin="16,52,0,16"/>
-                <ListView ItemsSource="{Binding BoxOffice}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
+                <ListView ItemsSource="{Binding BoxOffice}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnListItemClick}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>

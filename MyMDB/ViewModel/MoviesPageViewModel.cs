@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace MyMDB.ViewModel
@@ -48,6 +49,30 @@ namespace MyMDB.ViewModel
             }
 
             await base.OnNavigatedToAsync(parameter, mode, state);
+        }
+
+        public void OnListItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is TrendingMovie)
+            {
+                TrendingMovie selectedMovie = (TrendingMovie)e.ClickedItem;
+                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
+            }
+            else if (e.ClickedItem is MovieExtended)
+            {
+                MovieExtended selectedMovie = (MovieExtended)e.ClickedItem;
+                NavigateToDetails(selectedMovie.Ids.Trakt);
+            }
+            else if (e.ClickedItem is AnticipatedMovie)
+            {
+                AnticipatedMovie selectedMovie = (AnticipatedMovie)e.ClickedItem;
+                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
+            }
+            else if (e.ClickedItem is BoxOfficeMovie)
+            {
+                BoxOfficeMovie selectedMovie = (BoxOfficeMovie)e.ClickedItem;
+                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
+            }
         }
 
         public void NavigateToDetails(int id)
