@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Template10.Services.NavigationService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -21,12 +20,11 @@ namespace MyMDB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MoviesSearchPage : Page
     {
-        public MainPage()
+        public MoviesSearchPage()
         {
             this.InitializeComponent();
         }
-       
     }
 }

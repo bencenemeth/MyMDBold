@@ -8,13 +8,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace MyMDB.ViewModel
 {
     public class MoviesPageViewModel : ViewModelBase
     {
+        public string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                if(!string.Equals(searchText, value))
+                {
+                    this.searchText = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
         public ObservableCollection<TrendingMovie> Trending { get; set; } = new ObservableCollection<TrendingMovie>();
         public ObservableCollection<MovieExtended> Popular { get; set; } = new ObservableCollection<MovieExtended>();
         public ObservableCollection<AnticipatedMovie> Anticipated { get; set; } = new ObservableCollection<AnticipatedMovie>();
@@ -75,9 +92,25 @@ namespace MyMDB.ViewModel
             }
         }
 
+        public void OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            //if (e.Key == VirtualKey.Enter)
+                //Search();
+        }
+
+        public void OnSearchClick(object sender, RoutedEventArgs e)
+        {
+            Search();
+        }
+
+        public void Search()
+        {
+            NavigationService.Navigate(typeof(MoviesSearchPage), SearchText);
+        }
+
         public void NavigateToDetails(int id)
         {
-            NavigationService.Navigate(typeof(MovieDetailsPage), id);
+            //NavigationService.Navigate(typeof(MovieDetailsPage), id);
         }
     }
 }

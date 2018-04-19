@@ -13,8 +13,25 @@
     </Page.DataContext>
     
     <StackPanel Name="panel">
-        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="{Binding ElementName=panel, Path=ActualHeight}">
+        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      Height="{Binding ElementName=panel, Path=ActualHeight}">
             <ItemsControl>
+                <StackPanel Orientation="Horizontal" Margin="0,24,0,0" HorizontalAlignment="Center">
+                    <TextBox Background="LightGray"
+                             Width="160"
+                             Margin="0,0,4,0"
+                             FontSize="20"
+                             Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             KeyDown="{x:Bind ViewModel.OnKeyDown}"
+                             Height="36"/>
+                    <Button Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Padding="0,0,0,0"
+                            Click="{x:Bind ViewModel.OnSearchClick}">
+                        <Image Source="ms-appx:///Assets/e721.png" Width="30"/>
+                    </Button>
+                </StackPanel>
                 <TextBlock Text="Trending" FontSize="32" FontWeight="Bold" Margin="16,16,0,16"/>
                 <ListView ItemsSource="{Binding Trending}" 
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" 

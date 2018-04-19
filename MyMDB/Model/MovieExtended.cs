@@ -27,5 +27,6 @@ namespace MyMDB.Model
         public string[] available_translations { get; set; }
         public string[] genres { get; set; }
         public string certification { get; set; }
+        public Images Images { get; set; }
     }
 }

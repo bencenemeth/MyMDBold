@@ -15,6 +15,7 @@ namespace MyMDB.Service
         {
             using (var client = new HttpClient())
             {
+
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("trakt-api-version", "2");
                 client.DefaultRequestHeaders.Add("trakt-api-key", clientKey);
@@ -114,6 +115,11 @@ namespace MyMDB.Service
         public async Task<Person> GetPersonExtendedAsync(int id)
         {
             return await GetAsync<Person>(new Uri(serverUrl, $"people/{id}?extended=full"));
+        }
+
+        public async Task<List<AnticipatedMovie>> GetSearchMovieAsync(string query)
+        {
+            return await GetAsync<List<AnticipatedMovie>>(new Uri(serverUrl, $"search/?type=movie&query={query}"));
         }
     }
 }
