@@ -20,10 +20,8 @@
                     <TextBox Background="LightGray"
                              Width="160"
                              Margin="0,0,4,0"
-                             FontSize="20"
                              Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             KeyDown="{x:Bind ViewModel.OnKeyDown}"
-                             Height="36"/>
+                             KeyDown="{x:Bind ViewModel.OnKeyDown}"/>
                     <Button Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                             HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
@@ -32,7 +30,10 @@
                         <Image Source="ms-appx:///Assets/e721.png" Width="30"/>
                     </Button>
                 </StackPanel>
-                <TextBlock Text="Trending" FontSize="32" FontWeight="Bold" Margin="16,16,0,16"/>
+                <TextBlock Text="Trending"
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Margin="16,16,0,16"/>
                 <ListView ItemsSource="{Binding Trending}" 
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                           ScrollViewer.HorizontalScrollMode="Enabled"

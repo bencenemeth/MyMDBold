@@ -18,6 +18,11 @@ namespace MyMDB.ViewModel
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        /// <summary>
+        /// Click on the movies image.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void MovieClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(typeof(MoviesPage));

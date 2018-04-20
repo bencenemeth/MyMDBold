@@ -42,59 +42,49 @@ namespace MyMDB.Service
         private readonly string clientKey = "1c59074b39a0bbc9d7a626ed048bfa0134df28af13d613206e176f807fdc13ee";
 
         /// <summary>
-        /// Returns a single movie's details.
+        /// Returns a single movie's  details.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<MovieExtended> GetMovieAsync(int id)
+        public async Task<Movie> GetMovieAsync(int id)
         {
-            return await GetAsync<MovieExtended>(new Uri(serverUrl, $"movies/{id}"));
-        }
-
-        /// <summary>
-        /// Returns a single movie's extended details.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<MovieExtended> GetMovieExtendedAsync(int id)
-        {
-            return await GetAsync<MovieExtended>(new Uri(serverUrl, $"movies/{id}?extended=full"));
+            return await GetAsync<Movie>(new Uri(serverUrl, $"movies/{id}?extended=full"));
         }
 
         /// <summary>
         /// Returns all movies being watched right now. Movies with the most users are returned first.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<TrendingMovie>> GetTrendingMoviesAsync()
+        public async Task<List<MovieExtended>> GetTrendingMoviesAsync()
         {
-            return await GetAsync<List<TrendingMovie>>(new Uri(serverUrl, "movies/trending"));
+            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, "movies/trending"));
         }
 
         /// <summary>
         /// Returns the most popular movies. Popularity is calculated using the rating percentage and the number of ratings.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<MovieExtended>> GetPopularMoviesAsync()
+        public async Task<List<Movie>> GetPopularMoviesAsync()
         {
-            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, "movies/popular"));
+            return await GetAsync<List<Movie>>(new Uri(serverUrl, "movies/popular"));
         }
 
         /// <summary>
         /// Returns the most anticipated movies based on the number of lists a movie appears on.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<AnticipatedMovie>> GetAnticipatedMoviesAsync()
+        public async Task<List<MovieExtended>> GetAnticipatedMoviesAsync()
         {
-            return await GetAsync<List<AnticipatedMovie>>(new Uri(serverUrl, "movies/anticipated"));
+            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, "movies/anticipated"));
         }
 
         /// <summary>
         /// Returns the top 10 grossing movies in the U.S. box office last weekend. Updated every Monday morning.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<BoxOfficeMovie>> GetBoxOfficeMoviesAsync()
+        public async Task<List<MovieExtended>> GetBoxOfficeMoviesAsync()
         {
-            return await GetAsync<List<BoxOfficeMovie>>(new Uri(serverUrl, "movies/boxoffice"));
+            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, "movies/boxoffice"));
         }
 
         /// <summary>
@@ -117,9 +107,24 @@ namespace MyMDB.Service
             return await GetAsync<Person>(new Uri(serverUrl, $"people/{id}?extended=full"));
         }
 
-        public async Task<List<AnticipatedMovie>> GetSearchMovieAsync(string query)
+        /// <summary>
+        /// Returns the result of the movie search. (only for movies)
+        /// </summary>
+        /// <param name="query">Searched text.</param>
+        /// <returns></returns>
+        public async Task<List<MovieExtended>> GetSearchMovieAsync(string query)
         {
-            return await GetAsync<List<AnticipatedMovie>>(new Uri(serverUrl, $"search/?type=movie&query={query}"));
+            return await GetAsync<List<MovieExtended>>(new Uri(serverUrl, $"search/?type=movie&query={query}"));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<List<Movie>> GetRelatedMovieAsync(int id)
+        {
+            return await GetAsync<List<Movie>>(new Uri(serverUrl, $"movies/{id}/related"));
         }
     }
 }

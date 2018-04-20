@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
+    /// <summary>
+    /// Model for IDs of movies, series and people.
+    /// </summary>
     public class IDs
     {
         public int Trakt { get; set; }

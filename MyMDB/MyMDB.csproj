@@ -95,15 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\AnticipatedMovie.cs" />
-    <Compile Include="Model\BoxOfficeMovie.cs" />
+    <Compile Include="Model\MovieExtended.cs" />
     <Compile Include="Model\IDs.cs" />
     <Compile Include="Model\Image.cs" />
     <Compile Include="Model\Images.cs" />
-    <Compile Include="Model\MovieExtended.cs" />
+    <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\PersonExtended.cs" />
-    <Compile Include="Model\TrendingMovie.cs" />
     <Compile Include="Service\TraktService.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MovieDetailsPageViewModel.cs" />

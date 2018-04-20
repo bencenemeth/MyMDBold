@@ -6,27 +6,17 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
-
+    /// <summary>
+    /// Model for the movie types from the list. Most of the properties will be null,
+    /// but this way, we only need 2 models for the movies.
+    /// </summary>
     public class MovieExtended
     {
-        public string Title { get; set; }
-        public int Year { get; set; }
-        public IDs Ids { get; set; }
-        public string tagline { get; set; }
-        public string overview { get; set; }
-        public string released { get; set; }
-        public int runtime { get; set; }
-        public string country { get; set; }
-        public DateTime updated_at { get; set; }
-        public object trailer { get; set; }
-        public string homepage { get; set; }
-        public int rating { get; set; }
-        public int votes { get; set; }
-        public int comment_count { get; set; }
-        public string language { get; set; }
-        public string[] available_translations { get; set; }
-        public string[] genres { get; set; }
-        public string certification { get; set; }
-        public Images Images { get; set; }
+        public string Type { get; set; }
+        public float Score { get; set; }
+        public int List_count { get; set; }
+        public int Revenue { get; set; }
+        public int Watchers { get; set; }
+        public Movie Movie { get; set; }
     }
 }

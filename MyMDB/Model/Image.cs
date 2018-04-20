@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
+    /// <summary>
+    /// Model for images.
+    /// </summary>
     public class Image
     {
         public object Full { get; set; }

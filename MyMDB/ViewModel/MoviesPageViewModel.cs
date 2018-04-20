@@ -18,6 +18,9 @@ namespace MyMDB.ViewModel
 {
     public class MoviesPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Property of the search textbox.
+        /// </summary>
         public string searchText;
         public string SearchText
         {
@@ -32,16 +35,27 @@ namespace MyMDB.ViewModel
             }
         }
 
-        public ObservableCollection<TrendingMovie> Trending { get; set; } = new ObservableCollection<TrendingMovie>();
-        public ObservableCollection<MovieExtended> Popular { get; set; } = new ObservableCollection<MovieExtended>();
-        public ObservableCollection<AnticipatedMovie> Anticipated { get; set; } = new ObservableCollection<AnticipatedMovie>();
-        public ObservableCollection<BoxOfficeMovie> BoxOffice { get; set; } = new ObservableCollection<BoxOfficeMovie>();
+        /// <summary>
+        /// Movie lists shown in the page.
+        /// </summary>
+        public ObservableCollection<MovieExtended> Trending { get; set; } = new ObservableCollection<MovieExtended>();
+        public ObservableCollection<Movie> Popular { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<MovieExtended> Anticipated { get; set; } = new ObservableCollection<MovieExtended>();
+        public ObservableCollection<MovieExtended> BoxOffice { get; set; } = new ObservableCollection<MovieExtended>();
 
+        /// <summary>
+        /// Network call on page loading.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="mode"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var service = new TraktService();
 
-            List<int> sizes = new List<int> { 10 };
+            /// Sizes for the movie lists.
+            List<int> sizes = new List<int>();
 
             var trending = await service.GetTrendingMoviesAsync();
             sizes.Add(trending.Count);
@@ -55,6 +69,7 @@ namespace MyMDB.ViewModel
             var boxoffice = await service.GetBoxOfficeMoviesAsync();
             sizes.Add(boxoffice.Count);
 
+            /// The shortest list length.
             int count = sizes.Min();
 
             for (int i = 0; i < count; i++)
@@ -68,49 +83,63 @@ namespace MyMDB.ViewModel
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        /// <summary>
+        /// Clicking on a list item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnListItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is TrendingMovie)
+            if (e.ClickedItem is Movie)
             {
-                TrendingMovie selectedMovie = (TrendingMovie)e.ClickedItem;
-                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
-            }
-            else if (e.ClickedItem is MovieExtended)
-            {
-                MovieExtended selectedMovie = (MovieExtended)e.ClickedItem;
+                Movie selectedMovie = (Movie)e.ClickedItem;
                 NavigateToDetails(selectedMovie.Ids.Trakt);
             }
-            else if (e.ClickedItem is AnticipatedMovie)
+                
+            else if(e.ClickedItem is MovieExtended)
             {
-                AnticipatedMovie selectedMovie = (AnticipatedMovie)e.ClickedItem;
+                MovieExtended selectedMovie = (MovieExtended)e.ClickedItem;
                 NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
             }
-            else if (e.ClickedItem is BoxOfficeMovie)
-            {
-                BoxOfficeMovie selectedMovie = (BoxOfficeMovie)e.ClickedItem;
-                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
-            }
+            
         }
 
+        /// <summary>
+        /// Navigating to the DetailsPage of the selected movie.
+        /// </summary>
+        /// <param name="id">ID of the selected movie.</param>
+        public void NavigateToDetails(int id)
+        {
+            NavigationService.Navigate(typeof(MovieDetailsPage), id);
+        }
+
+        /// <summary>
+        /// Search on pressing enter key.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            //if (e.Key == VirtualKey.Enter)
-                //Search();
+            if (e.Key == VirtualKey.Enter)
+                Search();
         }
 
+        /// <summary>
+        /// Clicking on the search icon.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnSearchClick(object sender, RoutedEventArgs e)
         {
             Search();
         }
 
+        /// <summary>
+        /// Searching.
+        /// </summary>
         public void Search()
         {
             NavigationService.Navigate(typeof(MoviesSearchPage), SearchText);
-        }
-
-        public void NavigateToDetails(int id)
-        {
-            //NavigationService.Navigate(typeof(MovieDetailsPage), id);
         }
     }
 }
