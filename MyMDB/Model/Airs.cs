@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
-    class PersonExtended
+    class Airs
     {
-        public string Character { get; set; }
-        public string Job { get; set; }
-        public Person Person { get; set; }
+        public string Day { get; set; }
+        public string Time { get; set; }
+        public string Timezone { get; set; }
     }
 }

@@ -27,5 +27,15 @@ namespace MyMDB.ViewModel
         {
             NavigationService.Navigate(typeof(MoviesPage));
         }
+
+        /// <summary>
+        /// Click on the series image.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void SeriesClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(typeof(ShowsPage));
+        }
     }
 }

@@ -27,6 +27,16 @@ namespace MyMDB.ViewModel
 
         public ObservableCollection<Movie> Related { get; set; } = new ObservableCollection<Movie>();
 
+        public Cast_Crew cast_Crew;
+        public Cast_Crew Cast_Crew
+        {
+            get { return cast_Crew; }
+            set
+            {
+                Set(ref cast_Crew, value);
+            }
+        }
+
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var movieID = (int)parameter;
@@ -41,6 +51,8 @@ namespace MyMDB.ViewModel
                 Related.Add(item);
             }
 
+            Cast_Crew = await service.GetCastCrewForMovieAsync(movieID);
+
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -49,23 +61,38 @@ namespace MyMDB.ViewModel
             if (e.ClickedItem is Movie)
             {
                 Movie selectedMovie = (Movie)e.ClickedItem;
-                NavigateToDetails(selectedMovie.Ids.Trakt);
+                NavigateToMovieDetails(selectedMovie.Ids.Trakt);
             }
 
             else if (e.ClickedItem is MovieExtended)
             {
                 MovieExtended selectedMovie = (MovieExtended)e.ClickedItem;
-                NavigateToDetails(selectedMovie.Movie.Ids.Trakt);
+                NavigateToMovieDetails(selectedMovie.Movie.Ids.Trakt);
             }
+        }
+
+        public void OnCastCrewMemberClick(object sender, ItemClickEventArgs e)
+        {
+            PersonExtended selectedPerson = (PersonExtended)e.ClickedItem;
+            NavigateToPersonDetails(selectedPerson.Person.IDs.Trakt);
         }
 
         /// <summary>
         /// Navigating to the DetailsPage of the selected movie.
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
-        public void NavigateToDetails(int id)
+        /// <param name="id">ID of the selected movie</param>
+        public void NavigateToMovieDetails(int id)
         {
             NavigationService.Navigate(typeof(MovieDetailsPage), id);
+        }
+
+        /// <summary>
+        /// Navigating to the DetailsPage of the selected person.
+        /// </summary>
+        /// <param name="id">ID of the selected person</param>
+        public void NavigateToPersonDetails(int id)
+        {
+            NavigationService.Navigate(typeof(PersonDetailsPage), id);
         }
     }
 }

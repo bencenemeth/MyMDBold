@@ -20,9 +20,9 @@ namespace MyMDB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SeriesDetailsPage : Page
+    public sealed partial class ShowsPage : Page
     {
-        public SeriesDetailsPage()
+        public ShowsPage()
         {
             this.InitializeComponent();
         }

@@ -95,19 +95,32 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Airs.cs" />
+    <Compile Include="Model\Cast_Crew.cs" />
+    <Compile Include="Model\Crew.cs" />
+    <Compile Include="Model\PersonAppearence.cs" />
+    <Compile Include="Model\PersonExtended.cs" />
     <Compile Include="Model\MovieExtended.cs" />
     <Compile Include="Model\IDs.cs" />
     <Compile Include="Model\Image.cs" />
     <Compile Include="Model\Images.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\PersonExtended.cs" />
+    <Compile Include="Model\Show.cs" />
+    <Compile Include="Model\ShowEpisode.cs" />
+    <Compile Include="Model\ShowExtended.cs" />
+    <Compile Include="Model\ShowSeason.cs" />
     <Compile Include="Service\TraktService.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MovieDetailsPageViewModel.cs" />
     <Compile Include="ViewModel\MoviesPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MoviesSearchPageViewModel.cs" />
+    <Compile Include="ViewModel\PersonDetailsPageViewModel.cs" />
+    <Compile Include="ViewModel\ShowDetailsPageViewModel.cs" />
+    <Compile Include="ViewModel\ShowSeasonPageViewModel.cs" />
+    <Compile Include="ViewModel\ShowsPageViewModel.cs" />
+    <Compile Include="ViewModel\ShowsSearchPageViewModel.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -126,11 +139,17 @@
     <Compile Include="View\PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SeriesDetailsPage.xaml.cs">
-      <DependentUpon>SeriesDetailsPage.xaml</DependentUpon>
+    <Compile Include="View\ShowDetailsPage.xaml.cs">
+      <DependentUpon>ShowDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SeriesPage.xaml.cs">
-      <DependentUpon>SeriesPage.xaml</DependentUpon>
+    <Compile Include="View\ShowSeasonPage.xaml.cs">
+      <DependentUpon>ShowSeasonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowsPage.xaml.cs">
+      <DependentUpon>ShowsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowsSearchPage.xaml.cs">
+      <DependentUpon>ShowsSearchPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -185,11 +204,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SeriesDetailsPage.xaml">
+    <Page Include="View\ShowDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SeriesPage.xaml">
+    <Page Include="View\ShowSeasonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowsSearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,9 +232,7 @@
       <Version>1.1.12</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Style\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

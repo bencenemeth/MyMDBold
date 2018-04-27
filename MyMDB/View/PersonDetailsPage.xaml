@@ -5,18 +5,37 @@
     xmlns:local="using:MyMDB.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MyMDB.ViewModel"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:PersonDetailsPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
     <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Margin="16,16,16,16">
+        <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Unknown_Person.png" Width="100" Margin="0,0,16,0" />
+                <Image Source="ms-appx:///Assets/Unknown_Person.png"
+                       Width="200"
+                       Margin="16,16,0,0" />
                 <StackPanel>
-                    <TextBlock Text="Name"/>
-                    <TextBlock Text="Birth"/>
+                    <TextBlock Text="{Binding Person.Name}"
+                               Margin="16,16,0,0"
+                               FontSize="24"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Person.Birthday}"
+                               Margin="16,16,0,0"
+                               FontSize="16"/>
+                    <TextBlock Text="{Binding Person.Birthplace}"
+                               Margin="16,16,0,0"
+                               FontSize="16"/>
                 </StackPanel>
             </StackPanel>
-            <TextBlock Text="Appeared in"/>
+            <TextBlock Text="{Binding Person.Biography}"
+                       TextWrapping="Wrap"
+                       Margin="16,16,16,16"/>
+            <TextBlock Text="Appeared in"
+                       Margin="16,16,16,16"/>
         </StackPanel>
     </ScrollViewer>
 </Page>

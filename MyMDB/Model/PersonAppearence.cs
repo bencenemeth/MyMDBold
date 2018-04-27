@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyMDB.Model
 {
-    class PersonExtended
+    class PersonAppearence
     {
-        public string Character { get; set; }
-        public string Job { get; set; }
-        public Person Person { get; set; }
     }
 }
