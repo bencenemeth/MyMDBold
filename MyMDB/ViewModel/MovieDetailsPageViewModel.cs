@@ -15,6 +15,9 @@ namespace MyMDB.ViewModel
 {
     class MovieDetailsPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The movie
+        /// </summary>
         public Movie searchedMovie;
         public Movie SearchedMovie
         {
@@ -25,8 +28,14 @@ namespace MyMDB.ViewModel
             }
         }
 
+        /// <summary>
+        /// List of related movies
+        /// </summary>
         public ObservableCollection<Movie> Related { get; set; } = new ObservableCollection<Movie>();
 
+        /// <summary>
+        /// Cast and crew members
+        /// </summary>
         public Cast_Crew cast_Crew;
         public Cast_Crew Cast_Crew
         {
@@ -39,10 +48,12 @@ namespace MyMDB.ViewModel
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            // Getting the ID of the movie from the parameter object
             var movieID = (int)parameter;
 
             var service = new TraktService();
 
+            // API calls
             SearchedMovie = await service.GetMovieAsync(movieID);
             var related = await service.GetRelatedMovieAsync(movieID);
 
@@ -56,21 +67,31 @@ namespace MyMDB.ViewModel
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        /// <summary>
+        /// Clicking on a related movie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnRelatedItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Movie)
             {
                 Movie selectedMovie = (Movie)e.ClickedItem;
-                NavigateToMovieDetails(selectedMovie.Ids.Trakt);
+                NavigateToMovieDetails(selectedMovie.IDs.Trakt);
             }
 
             else if (e.ClickedItem is MovieExtended)
             {
                 MovieExtended selectedMovie = (MovieExtended)e.ClickedItem;
-                NavigateToMovieDetails(selectedMovie.Movie.Ids.Trakt);
+                NavigateToMovieDetails(selectedMovie.Movie.IDs.Trakt);
             }
         }
 
+        /// <summary>
+        /// Clicking on a cast or crew member
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnCastCrewMemberClick(object sender, ItemClickEventArgs e)
         {
             PersonExtended selectedPerson = (PersonExtended)e.ClickedItem;
@@ -78,7 +99,7 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
         /// <param name="id">ID of the selected movie</param>
         public void NavigateToMovieDetails(int id)
@@ -87,7 +108,7 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected person.
+        /// Navigating to the DetailsPage of the selected person
         /// </summary>
         /// <param name="id">ID of the selected person</param>
         public void NavigateToPersonDetails(int id)

@@ -15,17 +15,25 @@ namespace MyMDB.Service
         {
             using (var client = new HttpClient())
             {
-
+                // Adding the required headers
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("trakt-api-version", "2");
                 client.DefaultRequestHeaders.Add("trakt-api-key", clientKey);
+
+                // Ignoring null values and missing members from response
                 var settings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
+
+                // Getting the response
                 var response = await client.GetAsync(uri);
+
+                // Reading response as string
                 var json = await response.Content.ReadAsStringAsync();
+
+                // Deserializing to the appropriate object
                 T result = JsonConvert.DeserializeObject<T>(json, settings);
                 return result;
             }
@@ -91,7 +99,7 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns the result of the movie search. (only for movies)
         /// </summary>
-        /// <param name="query">Searched text.</param>
+        /// <param name="query">Searched text</param>
         /// <returns></returns>
         public async Task<List<MovieExtended>> GetSearchMovieAsync(string query)
         {
@@ -101,7 +109,7 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns related and similar movies.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the movie</param>
         /// <returns></returns>
         public async Task<List<Movie>> GetRelatedMovieAsync(int id)
         {
@@ -111,7 +119,7 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns all cast and crew for a movie. 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the movie</param>
         /// <returns></returns>
         public async Task<Cast_Crew> GetCastCrewForMovieAsync(int id)
         {
@@ -121,9 +129,9 @@ namespace MyMDB.Service
 
 
         /// <summary>
-        /// Returns a single show's  details.
+        /// Returns a single show's details.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the show</param>
         /// <returns></returns>
         public async Task<Show> GetShowAsync(int id)
         {
@@ -170,7 +178,7 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns the result of the shows search. (only for shows)
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="query">Searched text</param>
         /// <returns></returns>
         public async Task<List<ShowExtended>> GetSearchShowAsync(string query)
         {
@@ -180,7 +188,7 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns related and similar shows.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the show</param>
         /// <returns></returns>
         public async Task<List<Show>> GetRelatedShowsAsync(int id)
         {
@@ -188,19 +196,9 @@ namespace MyMDB.Service
         }
 
         /// <summary>
-        /// Returns all cast and crew for a show. 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<Cast_Crew> GetCastCrewForShowAsync(int id)
-        {
-            return await GetAsync<Cast_Crew>(new Uri(serverUrl, $"shows/{id}/people"));
-        }
-
-        /// <summary>
         /// Returns all seasons for a show including the number of episodes in each season.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the show</param>
         /// <returns></returns>
         public async Task<List<ShowSeason>> GetShowSeasonsAsync(int id)
         {
@@ -210,16 +208,24 @@ namespace MyMDB.Service
         /// <summary>
         /// Returns all seasons for a show including the number of episodes in each season.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">ID of the show</param>
         /// <returns></returns>
         public async Task<List<ShowEpisode>> GetShowSeasonAsync(int id, int season)
         {
             return await GetAsync<List<ShowEpisode>>(new Uri(serverUrl, $"shows/{id}/seasons/?season={season}"));
         }
 
+        /// <summary>
+        /// Returns all cast and crew for a show. 
+        /// </summary>
+        /// <param name="id">ID of the cast/crew member</param>
+        /// <returns></returns>
+        public async Task<Cast_Crew> GetCastCrewForShowAsync(int id)
+        {
+            return await GetAsync<Cast_Crew>(new Uri(serverUrl, $"shows/{id}/people"));
+        }
 
-
-
+        
 
         /// <summary>
         /// Returns a single person's extended details.

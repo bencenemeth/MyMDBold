@@ -98,7 +98,6 @@
     <Compile Include="Model\Airs.cs" />
     <Compile Include="Model\Cast_Crew.cs" />
     <Compile Include="Model\Crew.cs" />
-    <Compile Include="Model\PersonAppearence.cs" />
     <Compile Include="Model\PersonExtended.cs" />
     <Compile Include="Model\MovieExtended.cs" />
     <Compile Include="Model\IDs.cs" />

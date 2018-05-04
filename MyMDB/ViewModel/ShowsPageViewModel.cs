@@ -19,7 +19,7 @@ namespace MyMDB.ViewModel
     class ShowsPageViewModel : ViewModelBase
     {
         /// <summary>
-        /// Property of the search textbox.
+        /// Property of the search textbox
         /// </summary>
         public string searchText;
         public string SearchText
@@ -30,6 +30,7 @@ namespace MyMDB.ViewModel
                 if (!string.Equals(searchText, value))
                 {
                     this.searchText = value;
+                    // Notify UI elements that the data has changed.
                     this.RaisePropertyChanged();
                 }
             }
@@ -43,23 +44,14 @@ namespace MyMDB.ViewModel
         public ObservableCollection<Show> MostWatched { get; set; } = new ObservableCollection<Show>();
         public ObservableCollection<ShowExtended> Anticipated { get; set; } = new ObservableCollection<ShowExtended>();
 
-        public Cast_Crew cast_Crew;
-        public Cast_Crew Cast_Crew
-        {
-            get { return cast_Crew; }
-            set
-            {
-                Set(ref cast_Crew, value);
-            }
-        }
-
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var service = new TraktService();
 
-            /// Sizes for the movie lists.
+            // Sizes for the movie lists
             List<int> sizes = new List<int>();
 
+            // API calls
             var trending = await service.GetTrendingShowsAsync();
             sizes.Add(trending.Count);
 
@@ -72,7 +64,7 @@ namespace MyMDB.ViewModel
             var anticipated = await service.GetAnticipatedShowsAsync();
             sizes.Add(anticipated.Count);
 
-            /// The shortest list length.
+            // The shortest list length.
             int count = sizes.Min();
 
             for (int i = 0; i < count; i++)
@@ -87,7 +79,7 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Clicking on a list item.
+        /// Clicking on a list item
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -96,28 +88,28 @@ namespace MyMDB.ViewModel
             if (e.ClickedItem is Show)
             {
                 Show selectedShow = (Show)e.ClickedItem;
-                NavigateToDetails(selectedShow.Ids.Trakt);
+                NavigateToDetails(selectedShow.IDs.Trakt);
             }
 
             else if (e.ClickedItem is ShowExtended)
             {
                 ShowExtended selectedShow = (ShowExtended)e.ClickedItem;
-                NavigateToDetails(selectedShow.Show.Ids.Trakt);
+                NavigateToDetails(selectedShow.Show.IDs.Trakt);
             }
 
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
+        /// <param name="id">ID of the selected movie</param>
         public void NavigateToDetails(int id)
         {
             NavigationService.Navigate(typeof(ShowDetailsPage), id);
         }
 
         /// <summary>
-        /// Search on pressing enter key.
+        /// Search on pressing enter key
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -128,7 +120,7 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Clicking on the search icon.
+        /// Clicking on the search icon
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -138,7 +130,7 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Searching for shows.
+        /// Searching for shows
         /// </summary>
         public void Search()
         {

@@ -15,6 +15,9 @@ namespace MyMDB.ViewModel
 {
     class ShowSeasonPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The show
+        /// </summary>
         public Show searchedShow;
         public Show SearchedShow
         {
@@ -25,6 +28,9 @@ namespace MyMDB.ViewModel
             }
         }
 
+        /// <summary>
+        /// The season of the show
+        /// </summary>
         public ShowSeason showSeason;
         public ShowSeason ShowSeason
         {
@@ -35,9 +41,19 @@ namespace MyMDB.ViewModel
             }
         }
 
+        /// <summary>
+        /// List of the show's episodes
+        /// </summary>
         public ObservableCollection<ShowEpisode> Episodes { get; set; } = new ObservableCollection<ShowEpisode>();
+
+        /// <summary>
+        /// List of the show's seasons
+        /// </summary>
         public ObservableCollection<ShowSeason> Seasons { get; set; } = new ObservableCollection<ShowSeason>();
 
+        /// <summary>
+        /// Cast and crew members
+        /// </summary>
         public Cast_Crew cast_Crew;
         public Cast_Crew Cast_Crew
         {
@@ -50,11 +66,13 @@ namespace MyMDB.ViewModel
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            // Getting the ID of the show and the season from the parameter object
             KeyValuePair<int, ShowSeason> keyValuePair = (KeyValuePair<int, ShowSeason>)parameter;
             ShowSeason = keyValuePair.Value;
 
             var service = new TraktService();
 
+            // API calls
             SearchedShow = await service.GetShowAsync(keyValuePair.Key);
             var seasons = await service.GetShowSeasonsAsync(keyValuePair.Key);
 
@@ -68,31 +86,41 @@ namespace MyMDB.ViewModel
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        /// <summary>
+        /// Clicking on a season
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OnSeasonClick(object sender, ItemClickEventArgs e)
+        {
+            ShowSeason selectedSeason = (ShowSeason)e.ClickedItem;
+            //KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(searchedShow.Ids.Trakt, selectedSeason.Number);
+            KeyValuePair<int, ShowSeason> keyValuePair = new KeyValuePair<int, ShowSeason>(searchedShow.IDs.Trakt, selectedSeason);
+            NavigateToShowSeasonDetails(keyValuePair);
+        }
+
+        /// <summary>
+        /// Clicking on a cast or crew member
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnCastCrewMemberClick(object sender, ItemClickEventArgs e)
         {
             PersonExtended selectedPerson = (PersonExtended)e.ClickedItem;
             NavigateToPersonDetails(selectedPerson.Person.IDs.Trakt);
         }
 
-        public void OnSeasonClick(object sender, ItemClickEventArgs e)
-        {
-            ShowSeason selectedSeason = (ShowSeason)e.ClickedItem;
-            //KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(searchedShow.Ids.Trakt, selectedSeason.Number);
-            KeyValuePair<int, ShowSeason> keyValuePair = new KeyValuePair<int, ShowSeason>(searchedShow.Ids.Trakt, selectedSeason);
-            NavigateToShowSeasonDetails(keyValuePair);
-        }
-
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
+        /// <param name="id">ID of the selected movie</param>
         public void NavigateToShowSeasonDetails(KeyValuePair<int, ShowSeason> keyValuePair)
         {
             NavigationService.Navigate(typeof(ShowSeasonPage), keyValuePair);
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected person.
+        /// Navigating to the DetailsPage of the selected person
         /// </summary>
         /// <param name="id">ID of the selected person</param>
         public void NavigateToPersonDetails(int id)

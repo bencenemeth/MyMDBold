@@ -15,6 +15,9 @@ namespace MyMDB.ViewModel
 {
     class ShowsSearchPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The result list (shows) for the searched text
+        /// </summary>
         public ObservableCollection<ShowExtended> Result { get; set; } = new ObservableCollection<ShowExtended>();
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -22,6 +25,7 @@ namespace MyMDB.ViewModel
             var query = (string)parameter;
             var service = new TraktService();
 
+            // API calls
             var result = await service.GetSearchShowAsync(query);
             foreach (var item in result)
             {
@@ -32,20 +36,20 @@ namespace MyMDB.ViewModel
         }
 
         /// <summary>
-        /// Clicking on a list item.
+        /// Clicking on a list item
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void OnListItemClick(object sender, ItemClickEventArgs e)
         {
             ShowExtended selectedMovie = (ShowExtended)e.ClickedItem;
-            NavigateToDetails(selectedMovie.Show.Ids.Trakt);
+            NavigateToDetails(selectedMovie.Show.IDs.Trakt);
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected show
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
+        /// <param name="id">ID of the selected show</param>
         public void NavigateToDetails(int id)
         {
             NavigationService.Navigate(typeof(ShowDetailsPage), id);
