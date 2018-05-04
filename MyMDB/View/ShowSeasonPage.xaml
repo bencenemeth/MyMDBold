@@ -12,116 +12,105 @@
         <vm:ShowSeasonPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg"
-                   Width="206"
-                   Height="180"
-                   HorizontalAlignment="Left"
-                   Margin="16,16,0,0"/>
-            <StackPanel>
-
+    <StackPanel Name="panel">
+        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      Height="{Binding ElementName=panel, Path=ActualHeight}"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding SearchedShow.Title}"
-                               Margin="16,16,0,0"
-                               FontSize="24"
-                               FontWeight="Bold"/>
-                    <TextBlock Text="{Binding ShowSeason.Title}"
-                               Margin="8,16,0,0"
-                               FontSize="24"
-                               FontWeight="Bold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="First aired:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding ShowSeason.First_aired}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Number of episodes:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding ShowSeason.Episode_count}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Rating:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding ShowSeason.Rating}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-
-        <TextBlock Text="{Binding ShowSeason.Overview}"
-                   TextWrapping="Wrap"
-                   Margin="16,16,16,16"/>
-
-        <TextBlock Text="Episodes:"
-                   Margin="16,16,0,16"
-                   FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Episodes}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                  ScrollViewer.HorizontalScrollMode="Enabled"
-                  IsItemClickEnabled="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
+                    <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg"
+                           Width="206"
+                           Height="180"
+                           HorizontalAlignment="Left"
+                           Margin="16,16,16,0"/>
                     <StackPanel>
-                        <TextBlock Text="{Binding Number}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
-        
-        <TextBlock Text="Seasons:"
-                   Margin="16,16,0,16"
-                   FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Seasons}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                  ScrollViewer.HorizontalScrollMode="Enabled"
-                  IsItemClickEnabled="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Title}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
 
-        <TextBlock Text="Cast/Crew:"
-                   Margin="16,16,0,16"
-                   FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Cast_Crew.Cast}"
-                  MaxHeight="300"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                  ScrollViewer.VerticalScrollMode="Enabled"
-                  IsItemClickEnabled="True"
-                  ItemClick="{x:Bind ViewModel.OnCastCrewMemberClick}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Person.Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding SearchedShow.Title}"
+                                       Margin="16,16,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"/>
+                            <TextBlock Text="{Binding ShowSeason.Title}"
+                                       Margin="8,16,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="First aired:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding ShowSeason.First_aired}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Number of episodes:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding ShowSeason.Episode_count}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Rating:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding ShowSeason.Rating}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
                     </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </StackPanel>
+
+                <TextBlock Text="{Binding ShowSeason.Overview}"
+                           TextWrapping="Wrap"
+                           TextAlignment="Justify"
+                           Margin="16,16,24,16"/>
+
+                <TextBlock Text="Seasons:"
+                           Margin="16,16,0,16"
+                           FontWeight="Bold"/>
+                <ListView Margin="16,0,24,0"
+                          ItemsSource="{Binding Seasons}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnSeasonClick}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+
+                <TextBlock Text="Cast/Crew:"
+                           Margin="16,16,0,16"
+                           FontWeight="Bold"/>
+                <ListView Margin="16,0,24,0"
+                          ItemsSource="{Binding Cast_Crew.Cast}"
+                          MaxHeight="300"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                          ScrollViewer.VerticalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnCastCrewMemberClick}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Person.Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ItemsControl>
+        </ScrollViewer>
     </StackPanel>
 </Page>

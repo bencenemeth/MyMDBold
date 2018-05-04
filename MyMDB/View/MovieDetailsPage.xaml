@@ -12,91 +12,108 @@
         <vm:MovieDetailsPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Orientation="Horizontal">
-            <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg"
-                   Width="206"
-                   Height="180"
-                   HorizontalAlignment="Left"
-                   Margin="16,16,0,0"/>
-            <StackPanel>
-                <TextBlock Text="{Binding SearchedMovie.Title}"
-                           Margin="16,16,0,0"
-                           FontSize="24"
+    <StackPanel Name="panel">
+        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      Height="{Binding ElementName=panel, Path=ActualHeight}"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg"
+                           Width="206"
+                           Height="180"
+                           HorizontalAlignment="Left"
+                           Margin="16,16,16,0"/>
+                    <StackPanel>
+                        
+                        <TextBlock Text="{Binding SearchedMovie.Title}"
+                                   Margin="16,16,0,0"
+                                   FontSize="24"
+                                   FontWeight="Bold"/>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Premier:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding SearchedMovie.Released}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Runtime:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding SearchedMovie.Runtime}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text=" minutes"
+                                       Margin="0,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Rating:"
+                                       Margin="16,16,0,0"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding SearchedMovie.Rating}"
+                                       Margin="8,16,0,0"
+                                       FontSize="16"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </StackPanel>
+                
+                <TextBlock Text="{Binding SearchedMovie.Overview}"
+                           TextWrapping="Wrap"
+                           TextAlignment="Justify"
+                           Margin="16,16,24,16"/>
+
+                <TextBlock Text="Related movies:"
+                           Margin="16,16,0,16"
                            FontWeight="Bold"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Premier:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding SearchedMovie.Released}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Runtime:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding SearchedMovie.Runtime}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text=" minutes"
-                               Margin="0,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Rating:"
-                               Margin="16,16,0,0"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding SearchedMovie.Rating}"
-                               Margin="8,16,0,0"
-                               FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        <TextBlock Text="{Binding SearchedMovie.Overview}"
-                   TextWrapping="Wrap"
-                   Margin="16,16,16,16"/>
-        <TextBlock Text="Related movies:"
-                   Margin="16,16,0,16"
-                   FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Related}" 
-                  ScrollViewer.HorizontalScrollBarVisibility="Visible" 
-                  ScrollViewer.HorizontalScrollMode="Enabled"
-                  IsItemClickEnabled="True"
-                  ItemClick="{x:Bind ViewModel.OnRelatedItemClick}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
-                        <TextBlock Text="{Binding Title}"
-                                   HorizontalAlignment="Center"
-                                   FontSize="16"
-                                   Margin="0,12,0,16"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
-        <TextBlock Text="Cast/Crew:"
-                   Margin="16,16,0,16"
-                   FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Cast_Crew.Cast}"
-                  MaxHeight="300"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                  ScrollViewer.VerticalScrollMode="Enabled"
-                  IsItemClickEnabled="True"
-                  ItemClick="{x:Bind ViewModel.OnCastCrewMemberClick}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Person.Name}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <ListView Margin="16,0,24,0"
+                          ItemsSource="{Binding Related}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                          ScrollViewer.HorizontalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnRelatedItemClick}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Image Source="ms-appx:///Assets/top-10-kaya-fm-movie-film-roll-clip-art-photos-1024x896.jpg" Width="300" Height="150"/>
+                                <TextBlock Text="{Binding Title}"
+                                           HorizontalAlignment="Center"
+                                           FontSize="16"
+                                           Margin="0,12,0,16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+                
+                <TextBlock Text="Cast/Crew:"
+                           Margin="16,16,0,16"
+                           FontWeight="Bold"/>
+                <ListView Margin="16,0,24,0"
+                          MaxHeight="300"
+                          ItemsSource="{Binding Cast_Crew.Cast}"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                          ScrollViewer.VerticalScrollMode="Enabled"
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ViewModel.OnCastCrewMemberClick}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Person.Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ItemsControl>
+        </ScrollViewer>
     </StackPanel>
 </Page>

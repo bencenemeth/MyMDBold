@@ -136,9 +136,6 @@
     <Compile Include="View\PersonDetailsPage.xaml.cs">
       <DependentUpon>PersonDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PersonPage.xaml.cs">
-      <DependentUpon>PersonPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ShowDetailsPage.xaml.cs">
       <DependentUpon>ShowDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -197,10 +194,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PersonDetailsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

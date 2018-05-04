@@ -12,30 +12,32 @@
         <vm:PersonDetailsPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Image Source="ms-appx:///Assets/Unknown_Person.png"
+    <StackPanel Name="panel">
+        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      Height="{Binding ElementName=panel, Path=ActualHeight}">
+            <ItemsControl>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="ms-appx:///Assets/Unknown_Person.png"
                        Width="200"
                        Margin="16,16,0,0" />
-                <StackPanel>
-                    <TextBlock Text="{Binding Person.Name}"
+                    <StackPanel>
+                        <TextBlock Text="{Binding Person.Name}"
                                Margin="16,16,0,0"
                                FontSize="24"
                                FontWeight="Bold"/>
-                    <TextBlock Text="{Binding Person.Birthday}"
+                        <TextBlock Text="{Binding Person.Birthday}"
                                Margin="16,16,0,0"
                                FontSize="16"/>
-                    <TextBlock Text="{Binding Person.Birthplace}"
+                        <TextBlock Text="{Binding Person.Birthplace}"
                                Margin="16,16,0,0"
                                FontSize="16"/>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <TextBlock Text="{Binding Person.Biography}"
+                <TextBlock Text="{Binding Person.Biography}"
                        TextWrapping="Wrap"
-                       Margin="16,16,16,16"/>
-            <TextBlock Text="Appeared in"
-                       Margin="16,16,16,16"/>
-        </StackPanel>
-    </ScrollViewer>
+                       TextAlignment="Justify"
+                       Margin="16,16,24,16"/>
+            </ItemsControl>
+        </ScrollViewer>
+    </StackPanel>
 </Page>

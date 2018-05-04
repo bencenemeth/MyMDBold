@@ -57,12 +57,6 @@ namespace MyMDB.ViewModel
 
             SearchedShow = await service.GetShowAsync(keyValuePair.Key);
             var seasons = await service.GetShowSeasonsAsync(keyValuePair.Key);
-            var episodes = await service.GetShowSeasonAsync(keyValuePair.Key, ShowSeason.Number);
-
-            foreach (var item in episodes)
-            {
-                Episodes.Add(item);
-            }
 
             foreach (var item in seasons)
             {
@@ -78,6 +72,23 @@ namespace MyMDB.ViewModel
         {
             PersonExtended selectedPerson = (PersonExtended)e.ClickedItem;
             NavigateToPersonDetails(selectedPerson.Person.IDs.Trakt);
+        }
+
+        public void OnSeasonClick(object sender, ItemClickEventArgs e)
+        {
+            ShowSeason selectedSeason = (ShowSeason)e.ClickedItem;
+            //KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(searchedShow.Ids.Trakt, selectedSeason.Number);
+            KeyValuePair<int, ShowSeason> keyValuePair = new KeyValuePair<int, ShowSeason>(searchedShow.Ids.Trakt, selectedSeason);
+            NavigateToShowSeasonDetails(keyValuePair);
+        }
+
+        /// <summary>
+        /// Navigating to the DetailsPage of the selected movie.
+        /// </summary>
+        /// <param name="id">ID of the selected movie.</param>
+        public void NavigateToShowSeasonDetails(KeyValuePair<int, ShowSeason> keyValuePair)
+        {
+            NavigationService.Navigate(typeof(ShowSeasonPage), keyValuePair);
         }
 
         /// <summary>
