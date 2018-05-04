@@ -15,6 +15,9 @@ namespace MyMDB.ViewModel
 {
     class ShowDetailsPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The show
+        /// </summary>
         public Show searchedShow;
         public Show SearchedShow
         {
@@ -25,11 +28,19 @@ namespace MyMDB.ViewModel
             }
         }
 
+        /// <summary>
+        /// List of the show's seasons
+        /// </summary>
         public ObservableCollection<ShowSeason> Seasons { get; set; } = new ObservableCollection<ShowSeason>();
 
+        /// <summary>
+        /// List of related shows
+        /// </summary>
         public ObservableCollection<Show> Related { get; set; } = new ObservableCollection<Show>();
 
-
+        /// <summary>
+        /// Cast and crew members
+        /// </summary>
         public Cast_Crew cast_Crew;
         public Cast_Crew Cast_Crew
         {
@@ -42,10 +53,12 @@ namespace MyMDB.ViewModel
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            // Getting the ID of the show from the parameter object
             var showID = (int)parameter;
 
             var service = new TraktService();
 
+            // API calls
             SearchedShow = await service.GetShowAsync(showID);
             var seasons = await service.GetShowSeasonsAsync(showID);
             var related = await service.GetRelatedShowsAsync(showID);
@@ -65,55 +78,72 @@ namespace MyMDB.ViewModel
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
+        /// <summary>
+        /// Clicking on a related show
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnRelatedItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is Show)
             {
                 Show selectedShow = (Show)e.ClickedItem;
-                NavigateToShowDetails(selectedShow.Ids.Trakt);
+                NavigateToShowDetails(selectedShow.IDs.Trakt);
             }
 
             else if (e.ClickedItem is ShowExtended)
             {
                 ShowExtended selectedShow = (ShowExtended)e.ClickedItem;
-                NavigateToShowDetails(selectedShow.Show.Ids.Trakt);
+                NavigateToShowDetails(selectedShow.Show.IDs.Trakt);
             }
         }
 
+        /// <summary>
+        /// Clicking on a season
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OnSeasonClick(object sender, ItemClickEventArgs e)
+        {
+            // Getting the ShowSeason object
+            ShowSeason selectedSeason = (ShowSeason)e.ClickedItem;
+            // Put it in a KeyValuePair with the ID of the show
+            KeyValuePair<int, ShowSeason> keyValuePair = new KeyValuePair<int, ShowSeason>(searchedShow.IDs.Trakt, selectedSeason);
+            NavigateToShowSeasonDetails(keyValuePair);
+        }
+
+        /// <summary>
+        /// Clicking on a cast or crew member
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnCastCrewMemberClick(object sender, ItemClickEventArgs e)
         {
             PersonExtended selectedPerson = (PersonExtended)e.ClickedItem;
             NavigateToPersonDetails(selectedPerson.Person.IDs.Trakt);
         }
 
-        public void OnSeasonClick(object sender, ItemClickEventArgs e)
-        {
-            ShowSeason selectedSeason = (ShowSeason)e.ClickedItem;
-            //KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(searchedShow.Ids.Trakt, selectedSeason.Number);
-            KeyValuePair<int, ShowSeason> keyValuePair = new KeyValuePair<int, ShowSeason>(searchedShow.Ids.Trakt, selectedSeason);
-            NavigateToShowSeasonDetails(keyValuePair);
-        }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
+        /// <param name="id">ID of the selected movie</param>
         public void NavigateToShowDetails(int id)
         {
             NavigationService.Navigate(typeof(ShowDetailsPage), id);
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
-        /// <param name="id">ID of the selected movie.</param>
+        /// <param name="id">ID of the selected movie</param>
         public void NavigateToShowSeasonDetails(KeyValuePair<int, ShowSeason> keyValuePair)
         {
             NavigationService.Navigate(typeof(ShowSeasonPage), keyValuePair);
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected person.
+        /// Navigating to the DetailsPage of the selected person
         /// </summary>
         /// <param name="id">ID of the selected person</param>
         public void NavigateToPersonDetails(int id)

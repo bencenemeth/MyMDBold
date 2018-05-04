@@ -14,6 +14,9 @@ namespace MyMDB.ViewModel
 {
     class PersonDetailsPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// The person
+        /// </summary>
         public Person person;
         public Person Person
         {
@@ -24,22 +27,20 @@ namespace MyMDB.ViewModel
             }
         }
 
-        public ObservableCollection<Movie> Movies { get; set; } = new ObservableCollection<Movie>();
-        public ObservableCollection<Show> Shows { get; set; } = new ObservableCollection<Show>();
-
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             var id = (int)parameter;
 
             var service = new TraktService();
 
+            // API call
             Person = await service.GetPersonAsync(id);
 
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         /// <summary>
-        /// Navigating to the DetailsPage of the selected movie.
+        /// Navigating to the DetailsPage of the selected movie
         /// </summary>
         /// <param name="id">ID of the selected movie</param>
         public void NavigateToMovieDetails(int id)

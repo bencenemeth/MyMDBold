@@ -13,7 +13,7 @@ namespace MyMDB.Model
     {
         public string Title { get; set; }
         public int Year { get; set; }
-        public IDs Ids { get; set; }
+        public IDs IDs { get; set; }
         public string Tagline { get; set; }
         public string Overview { get; set; }
         public string Released { get; set; }
